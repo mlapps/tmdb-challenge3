@@ -52,10 +52,6 @@ export default class List extends Lightning.Component {
         this.tag("Items").setSmooth("x",  idx * -220 );
     }
 
-    set label(v) {
-        // @todo: update list title
-    }
-
     set movies(v) {
         // we add an array of object with type: Item
         this.tag("Items").children = v.map((movie, index)=>{
