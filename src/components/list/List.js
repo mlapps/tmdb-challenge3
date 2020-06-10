@@ -1,5 +1,5 @@
 import {Lightning} from "wpe-lightning-sdk";
-import Item from "../item";
+import Item from "../item/Item";
 
 export default class List extends Lightning.Component {
     static _template() {
