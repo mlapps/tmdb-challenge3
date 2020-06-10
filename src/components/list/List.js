@@ -8,7 +8,7 @@ export default class List extends Lightning.Component {
                 y: 120, forceZIndexContext: true, boundsMargin: [500, 100, 500, 100],
                 transitions: {
                     x: {duration: .3, timingFunction: 'cubic-bezier(0.20, 1.00, 0.80, 1.00)'}
-                }
+                },
             },
             Focus: {
                 /**
@@ -83,5 +83,9 @@ export default class List extends Lightning.Component {
 
     _getFocused() {
         return this.activeItem;
+    }
+
+    $updateMetadata(item) {
+        this.tag("Title").patch({text: item.title});
     }
 }
