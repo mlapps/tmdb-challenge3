@@ -44,12 +44,6 @@ export default class List extends Lightning.Component {
         this.setIndex(Math.min(++this._index, this.items.length - 1));
     }
 
-    /**
-     * @todo:
-     * Implement working setIndex method
-     * that stores index and position movie component to focus
-     * on selected item
-     */
     setIndex(idx){
         // store new index
         this._index = idx;
