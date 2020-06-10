@@ -18,10 +18,16 @@ export default class List extends Lightning.Component {
                  */
             },
             Metadata: {
-                /**
-                 * @todo: Your goal is to add a component that have multiple text labels,
-                 * 1 for the Title of the selected asset and 1 for the genre.
-                 */
+                Title: {
+                    x:0, y:0,
+                    type: lng.Text,
+                    text: {text: "Title placeholder", fontSize: 48, fontFace: "SourceSansPro-Regular"},
+                },
+                Genre: {
+                    x:0, y:50,
+                    type: lng.Text,
+                    text: {text:"Genre placeholder", fontSize: 24, fontFace: "SourceSansPro-Regular"},
+                }
             }
         }
     }
