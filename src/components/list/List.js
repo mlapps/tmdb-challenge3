@@ -11,11 +11,11 @@ export default class List extends Lightning.Component {
                 },
             },
             Focus: {
-                /**
-                 * @ todo: Your goal is to add a focus indicator. Please take a look at the video
-                 * and inspect the rectanle frame that's before the focused movie item.
-                 * extra: Animate it a bit when the focus changes to the next item
-                 */
+                texture: Lightning.Tools.getRoundRect(Item.width+8, Item.height+8, 10, 4, 0xff8ecea2, false, 0xff00ffff),
+                alpha: 0,
+                x: -7,
+                y: 152,
+                scale: 1.2,
             },
             Metadata: {
                 Title: {
@@ -76,6 +76,18 @@ export default class List extends Lightning.Component {
     }
 
     $updateMetadata(item) {
-        this.tag("Title").patch({text: item.title});
+        const focusTransitionDuration = 0.5;
+
+        console.log("updateMetadata: "+item.title);
+        if (!!item.title) {
+            this.tag("Title").patch({text: item.title});
+            this.tag("Genre").patch({text: "Genre placeholder"});
+            this.tag("Focus").setSmooth("alpha", 1, {duration: focusTransitionDuration});
+        } else {
+            this.tag("Title").patch({text: ""});
+            this.tag("Genre").patch({text: ""});
+            this.tag("Focus").setSmooth("alpha", 0, {duration: focusTransitionDuration});
+
+        }
     }
 }
