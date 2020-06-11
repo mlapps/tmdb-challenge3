@@ -1,6 +1,7 @@
 import {Img, Lightning} from "wpe-lightning-sdk";
 import CircleProgressShader from "../../shader/CircleProgressShader";
 import {getImgUrl} from "../../lib/tools";
+import Movie from "../../lib/models/Movie";
 
 export default class Item extends Lightning.Component {
     static _template() {
@@ -137,6 +138,8 @@ export default class Item extends Lightning.Component {
         });
 
         this._focusAnimation.stop();
+
+        this.fireAncestors('$updateMetadata', new Movie({title: ""}))
     }
 
     static get width() {
