@@ -1,72 +1,76 @@
+const capitalize = s =>  s ? s.charAt(0).toUpperCase() + s.slice(1) : s
+
 export default class Movie {
-    constructor(obj,genres){
-        this._adult = obj.adult;
-        this._backdrop_path = obj.backdrop_path;
-        this._id = obj.id;
-        this._original_language = obj.original_language;
-        this._overview = obj.overview;
-        this._popularity = obj.popularity;
-        this._poster_path = obj.poster_path;
-        this._release_date = obj.release_date;
-        this._title = obj.title;
-        this._video = obj.video;
-        this._vote_average = obj.vote_average;
-        this._vote_count = obj.vote_count;
-    }
+  constructor(obj, genres) {
+    this._adult = obj.adult;
+    this._backdrop_path = obj.backdrop_path;
+    this._id = obj.id;
+    this._genres = obj.genre_ids.map(id => capitalize(genres[id]));
+    this._original_language = obj.original_language;
+    this._overview = obj.overview;
+    this._popularity = obj.popularity;
+    this._poster_path = obj.poster_path;
+    this._release_date = obj.release_date;
+    this._title = obj.title;
+    this._video = obj.video;
+    this._vote_average = obj.vote_average;
+    this._vote_count = obj.vote_count;
 
-    get adult() {
-        return this._adult;
-    }
+  }
 
-    get background() {
-        return this._backdrop_path;
-    }
+  get adult() {
+    return this._adult;
+  }
 
-    get genres(){
-        return this._genres;
-    }
+  get background() {
+    return this._backdrop_path;
+  }
 
-    get id() {
-        return this._id;
-    }
+  get genres() {
+    return this._genres;
+  }
 
-    get originalLanguage() {
-        return this._original_language;
-    }
+  get id() {
+    return this._id;
+  }
 
-    get overview() {
-        return this._overview;
-    }
+  get originalLanguage() {
+    return this._original_language;
+  }
 
-    get popularity() {
-        return this._popularity;
-    }
+  get overview() {
+    return this._overview;
+  }
 
-    get poster() {
-        return this._poster_path;
-    }
+  get popularity() {
+    return this._popularity;
+  }
 
-    get releaseDate() {
-        return this._release_date;
-    }
+  get poster() {
+    return this._poster_path;
+  }
 
-    get title() {
-        return this._title;
-    }
+  get releaseDate() {
+    return this._release_date;
+  }
 
-    get type() {
-        return this._type;
-    }
+  get title() {
+    return this._title;
+  }
 
-    get video() {
-        return this._video;
-    }
+  get type() {
+    return this._type;
+  }
 
-    get voteAverage() {
-        return this._vote_average;
-    }
+  get video() {
+    return this._video;
+  }
 
-    get voteCount() {
-        return this._vote_count;
-    }
+  get voteAverage() {
+    return this._vote_average;
+  }
+
+  get voteCount() {
+    return this._vote_count;
+  }
 }

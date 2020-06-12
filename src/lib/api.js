@@ -1,36 +1,36 @@
-import {Movie} from "./models";
-
+import { Movie, Serie } from "./models";
+const headers = {
+  Accept: "application/json"
+};
 const apiKey = `66683917a94e703e14ca150023f4ea7c`;
 let stage;
 
-export const init = (stageInstance) =>{
-    stage = stageInstance;
+export const init = stageInstance => {
+  stage = stageInstance;
 };
 
-/**
- * @todo:
- * call get with the correct url
- * https://api.themoviedb.org/3/movie/popular
- * and return the data
- */
-export const getMovies = async()=> {
-    const movies = await get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`);
-    const {results = []} = movies;
+const remapGenres = ({ genres }) => genres.reduce((map, { id, name }) => ({ ...map, [id]: name }), {});
 
-    if(results.length){
-        return results.map((data)=>{
-            return new Movie(data);
-        });
-    }
+const get = url => fetch(url, { headers }).then(response => response.json());
 
-    return [];
+export const getMovies = async () => {
+  const movies = await get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`);
+  const genres = await get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`);
+  const results = movies.results || [];
+
+  return results.map(data => new Movie(data, remapGenres(genres)));
 };
 
-const get = (url)=> {
-    return fetch(url, {
-        'Accept': 'application/json'
-    }).then(response => {
-        return response.json();
-    })
+export const getSeries = async () => {
+  const series = await get(`https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}`);
+  const genres = await get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}`);
+  const results = series.results || [];
+
+  return results.map(data => new Serie(data, remapGenres(genres)));
 };
 
+export const getDetailedMovie = movieId =>
+  get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`);
+
+export const getDetailedSerie = serieId =>
+  get(`https://api.themoviedb.org/3/tv/${serieId}?api_key=${apiKey}`);
