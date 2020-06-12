@@ -1,4 +1,4 @@
-import { Movie, Serie } from "./models";
+import { Entity } from "./models";
 const headers = {
   Accept: "application/json"
 };
@@ -18,7 +18,7 @@ export const getMovies = async () => {
   const genres = await get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`);
   const results = movies.results || [];
 
-  return results.map(data => new Movie(data, remapGenres(genres)));
+  return results.map(data => new Entity(data, remapGenres(genres)));
 };
 
 export const getSeries = async () => {
@@ -26,7 +26,7 @@ export const getSeries = async () => {
   const genres = await get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}`);
   const results = series.results || [];
 
-  return results.map(data => new Serie(data, remapGenres(genres)));
+  return results.map(data => new Entity(data, remapGenres(genres)));
 };
 
 export const getDetailedMovie = movieId =>

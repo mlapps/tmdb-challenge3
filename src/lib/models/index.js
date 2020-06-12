@@ -1,2 +1,1 @@
-export {default as Movie} from "./Movie";
-export {default as Serie} from "./Series";
+export {default as Entity} from "./Entity";
