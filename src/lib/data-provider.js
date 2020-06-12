@@ -29,9 +29,9 @@ export default () => {
   );
 
   Router.before(
-    "movies/:movieId",
-    async ({ page, movieId }) => {
-      page.data = await getDetailedMovie(movieId);
+    "movies/:entityId",
+    async ({ page, entityId }) => {
+      page.data = await getDetailedMovie(entityId);
     },
     10 * 60 /* expires */
   );
@@ -48,9 +48,9 @@ export default () => {
   );
 
   Router.before(
-    "series/:serieId",
-    async ({ page, serieId }) => {
-      page.data = await getDetailedSerie(serieId);
+    "series/:entityId",
+    async ({ page, entityId }) => {
+      page.data = await getDetailedSerie(entityId);
     },
     10 * 60 /* expires */
   );

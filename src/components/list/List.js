@@ -1,4 +1,4 @@
-import { Lightning } from "wpe-lightning-sdk";
+import { Lightning, Router } from "wpe-lightning-sdk";
 import Item from "../item/Item";
 
 export default class List extends Lightning.Component {
@@ -62,6 +62,7 @@ export default class List extends Lightning.Component {
   }
 
   $updateMetadata({ item }) {
+    this._selectedItem = item;
     this.patch({
       Metadata: {
         Title: { text: { text: item.title } },
@@ -74,10 +75,12 @@ export default class List extends Lightning.Component {
   }
 
   _unfocus() {
-    this.tag("Focus").patch({
-      smooth: {
-        alpha: 0,
-        scale: 1
+    this.patch({
+      Focus: {
+        smooth: {
+          alpha: 0,
+          scale: 1
+        }
       }
     });
   }
@@ -94,6 +97,15 @@ export default class List extends Lightning.Component {
     this.setIndex(Math.min(++this._index, this.items.length - 1));
   }
 
+  _handleEnter() {
+    this.patch({
+      Focus: {
+        x: -1000
+      }
+    });
+    Router.navigate(`${this._pageRoute}/${this._selectedItem.id}`);
+  }
+
   setIndex(idx) {
     // store new index
     this._index = idx;
@@ -103,6 +115,7 @@ export default class List extends Lightning.Component {
   }
 
   set label(text) {
+    this._pageRoute = text.toLowerCase();
     this.tag("Label").text.text = text;
   }
 

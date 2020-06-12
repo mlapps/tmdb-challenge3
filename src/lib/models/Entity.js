@@ -5,12 +5,12 @@ export default class Entity {
     this._adult = obj.adult;
     this._backdrop_path = obj.backdrop_path;
     this._id = obj.id;
-    this._genres = obj.genre_ids.map(id => capitalize(genres[id]));
+    this._genres = (obj.genre_ids || obj.genres).map(id => capitalize(genres[id]));
     this._original_language = obj.original_language;
     this._overview = obj.overview;
     this._popularity = obj.popularity;
     this._poster_path = obj.poster_path;
-    this._release_date = obj.release_date;
+    this._release_date = obj.release_date || obj.first_air_date;
     this._title = obj.title || obj.name;
     this._video = obj.video;
     this._vote_average = obj.vote_average;
